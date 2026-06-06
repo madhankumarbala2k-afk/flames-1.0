@@ -67,6 +67,16 @@ function hideAlert() {
 // =====================
 const API_URL = ''; // Relative path since static files are served on the same port
 
+// Helper to safely parse JSON response or throw a friendly offline error
+async function parseResponse(response) {
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+        return await response.json();
+    }
+    // Non-JSON response (e.g. 404 HTML page from static hosting like GitHub Pages, or server offline)
+    throw new Error("Server response was not in JSON format. Please verify that node server.js is running.");
+}
+
 async function handleRegister(e) {
     e.preventDefault();
     hideAlert();
@@ -87,7 +97,7 @@ async function handleRegister(e) {
             body: JSON.stringify({ username, email, password })
         });
         
-        const data = await response.json();
+        const data = await parseResponse(response);
         
         if (!response.ok) {
             throw new Error(data.message || 'Registration failed');
@@ -103,7 +113,11 @@ async function handleRegister(e) {
         }, 1000);
         
     } catch (error) {
-        showAlert(error.message || 'Something went wrong. Please try again.');
+        if (error.message.includes("Failed to fetch") || error.message.includes("NetworkError")) {
+            showAlert("Cannot connect to server. Please check if your backend server (node server.js) is running.");
+        } else {
+            showAlert(error.message);
+        }
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHTML;
@@ -129,7 +143,7 @@ async function handleLogin(e) {
             body: JSON.stringify({ handle, password })
         });
         
-        const data = await response.json();
+        const data = await parseResponse(response);
         
         if (!response.ok) {
             throw new Error(data.message || 'Invalid credentials');
@@ -145,7 +159,11 @@ async function handleLogin(e) {
         }, 1000);
         
     } catch (error) {
-        showAlert(error.message || 'Something went wrong. Please try again.');
+        if (error.message.includes("Failed to fetch") || error.message.includes("NetworkError")) {
+            showAlert("Cannot connect to server. Please check if your backend server (node server.js) is running.");
+        } else {
+            showAlert(error.message);
+        }
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHTML;
@@ -173,7 +191,7 @@ async function checkAuth() {
             }
         });
         
-        const user = await response.json();
+        const user = await parseResponse(response);
         
         if (!response.ok) {
             throw new Error('Token verification failed');
