@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLAMES Love Hub 💖</title>
-    <meta name="description" content="Play FLAMES, generate Tamil Kavithai, Love Letters, and chat with your partner!">
+    <title>FLAMES Hub - Welcome 💖</title>
+    <meta name="description" content="Securely access your FLAMES Hub account.">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
@@ -14,132 +14,91 @@
 </head>
 <body>
 
-    <div class="background-animation"></div>
+    <div class="background-animation" id="bg-anim"></div>
 
-    <!-- Navigation -->
+    <!-- Header -->
     <header>
-        <nav>
+        <nav class="nav-center">
             <div class="logo">
                 <i class="fa-solid fa-heart-pulse"></i> FLAMES<span>Hub</span>
             </div>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-            <ul class="nav-list" id="nav-list">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#flames-section">FLAMES</a></li>
-                <li><a href="#chat-section">Chat</a></li>
-                <li><a href="#kavithai-section">Kavithai</a></li>
-                <li><a href="#letter-section">Love Letter</a></li>
-                <li><a href="#fun-section">Extra Fun</a></li>
-            </ul>
         </nav>
     </header>
 
-    <main>
-
-        <!-- Hero -->
-        <section class="hero" id="home">
-            <h1>Welcome to FLAMES Love Hub 💖</h1>
-            <p>Discover your relationship fate, generate Tamil poetry, and express your feelings.</p>
-            <div class="hero-btns">
-                <a href="#flames-section" class="primary-btn">Play FLAMES 🔥</a>
-                <a href="#kavithai-section" class="secondary-btn">Kavithai ✍️</a>
+    <main class="auth-container">
+        <!-- Auth Glass Card -->
+        <div class="glass-panel auth-card" id="auth-card">
+            <!-- Tabs -->
+            <div class="auth-tabs" id="auth-tabs">
+                <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Register</button>
             </div>
-        </section>
 
-        <!-- FLAMES Game -->
-        <section id="flames-section" class="glass-panel">
-            <h2><i class="fa-solid fa-fire-flame-curved"></i> FLAMES Matcher</h2>
-            <p class="section-desc">Enter two names to find your relationship</p>
-            <div class="input-group">
-                <input type="text" id="name1" placeholder="Your Name 💗" autocomplete="off">
-                <i class="fa-solid fa-plus plus-icon"></i>
-                <input type="text" id="name2" placeholder="Partner's Name 💗" autocomplete="off">
-            </div>
-            <button class="primary-btn" onclick="calculateFlames()">Check Relationship <i class="fa-solid fa-wand-magic-sparkles"></i></button>
-            <div id="flames-result-container" class="hidden">
-                <div class="loading-hearts"><i class="fa-solid fa-heart fa-beat"></i></div>
-                <div class="flames-letters">
-                    <span class="fl-letter" id="fl-F">F</span>
-                    <span class="fl-letter" id="fl-L">L</span>
-                    <span class="fl-letter" id="fl-A">A</span>
-                    <span class="fl-letter" id="fl-M">M</span>
-                    <span class="fl-letter" id="fl-E">E</span>
-                    <span class="fl-letter" id="fl-S">S</span>
+            <!-- Error/Success Alert Box -->
+            <div id="alert-box" class="alert-box hidden"></div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
+                <h2><i class="fa-solid fa-right-to-bracket"></i> Login to Hub</h2>
+                <p class="section-desc">Enter your username or email and password to log in.</p>
+                <div class="form-group">
+                    <label for="login-handle"><i class="fa-solid fa-user"></i> Username or Email</label>
+                    <input type="text" id="login-handle" placeholder="e.g. loverboy or love@hub.com" required autocomplete="username">
                 </div>
-                <h3 id="flames-result" class="result-text"></h3>
-                <p id="flames-desc" class="result-desc"></p>
-            </div>
-        </section>
-
-        <!-- Chat Section -->
-        <section id="chat-section" class="glass-panel">
-            <h2><i class="fa-regular fa-comments"></i> Sweet Nothings 💬</h2>
-            <p class="section-desc">Chat with your crush (simulated)</p>
-            <div class="chat-container">
-                <div class="chat-header">
-                    <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
-                    <div class="chat-info">
-                        <h4>Crush <i class="fa-solid fa-heart"></i></h4>
-                        <span class="online-dot">● Online</span>
-                    </div>
+                <div class="form-group">
+                    <label for="login-password"><i class="fa-solid fa-key"></i> Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
                 </div>
-                <div class="chat-messages" id="chat-box">
-                    <div class="message received">Hi there! ❤️ I was waiting for you!</div>
+                <button type="submit" class="primary-btn submit-btn">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form hidden" onsubmit="handleRegister(event)">
+                <h2><i class="fa-solid fa-user-plus"></i> Join the Hub</h2>
+                <p class="section-desc">Create your free account to access features.</p>
+                <div class="form-group">
+                    <label for="reg-username"><i class="fa-solid fa-signature"></i> Username</label>
+                    <input type="text" id="reg-username" placeholder="e.g. romeo123" required autocomplete="username">
                 </div>
-                <div class="typing-indicator hidden" id="typing-indicator">
-                    Crush is typing<span>.</span><span>.</span><span>.</span>
+                <div class="form-group">
+                    <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                    <input type="email" id="reg-email" placeholder="e.g. juliet@hub.com" required autocomplete="email">
                 </div>
-                <div class="chat-inputarea">
-                    <button class="emoji-btn" onclick="insertEmoji('😘')">😘</button>
-                    <button class="emoji-btn" onclick="insertEmoji('😍')">😍</button>
-                    <button class="emoji-btn" onclick="insertEmoji('💕')">💕</button>
-                    <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="handleChatEnter(event)">
-                    <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+                <div class="form-group">
+                    <label for="reg-password"><i class="fa-solid fa-key"></i> Password</label>
+                    <input type="password" id="reg-password" placeholder="••••••••" required autocomplete="new-password">
+                </div>
+                <button type="submit" class="primary-btn submit-btn">Create Account <i class="fa-solid fa-circle-check"></i></button>
+            </form>
+        </div>
+
+        <!-- Logged In Dashboard (Initially Hidden) -->
+        <div class="glass-panel dashboard-card hidden" id="dashboard-card">
+            <div class="dashboard-header">
+                <div class="profile-avatar">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <h1 id="welcome-message">Welcome back! 💖</h1>
+                <p class="section-desc">You are successfully logged into your FLAMES Hub account.</p>
+            </div>
+            
+            <div class="user-details">
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fa-solid fa-circle-user"></i> Username:</span>
+                    <span class="detail-val" id="profile-username">loading...</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email:</span>
+                    <span class="detail-val" id="profile-email">loading...</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label"><i class="fa-solid fa-id-card"></i> User ID:</span>
+                    <span class="detail-val" id="profile-id">loading...</span>
                 </div>
             </div>
-        </section>
 
-        <!-- Kavithai Generator -->
-        <section id="kavithai-section" class="glass-panel">
-            <h2><i class="fa-solid fa-feather-pointed"></i> Tamil Kavithai Generator</h2>
-            <p class="section-desc">Enter a name or topic (e.g., Kangal, Kadhal, Sirippu)</p>
-            <div class="input-group column">
-                <input type="text" id="kavithai-topic" placeholder="e.g. Kangal, Kadhal...">
-                <button class="primary-btn" onclick="generateKavithai()">Generate Kavithai <i class="fa-solid fa-wand-magic-sparkles"></i></button>
-            </div>
-            <div id="kavithai-output" class="output-box hidden"></div>
-        </section>
-
-        <!-- Love Letter Generator -->
-        <section id="letter-section" class="glass-panel">
-            <h2><i class="fa-regular fa-envelope"></i> Love Letter Generator</h2>
-            <p class="section-desc">Create a heartfelt letter in seconds</p>
-            <div class="form-grid">
-                <input type="text" id="sender-name" placeholder="Your Name 💌">
-                <input type="text" id="receiver-name" placeholder="Their Name 💌">
-                <select id="letter-mood">
-                    <option value="romantic">🌹 Romantic</option>
-                    <option value="cute">🧸 Cute</option>
-                    <option value="emotional">🥺 Emotional</option>
-                </select>
-            </div>
-            <button class="primary-btn" onclick="generateLetter()">Create Letter <i class="fa-regular fa-pen-to-square"></i></button>
-            <div id="letter-output" class="output-box letter-style hidden"></div>
-        </section>
-
-        <!-- Extra Fun -->
-        <section id="fun-section" class="glass-panel">
-            <h2><i class="fa-solid fa-gift"></i> Extra Fun</h2>
-            <div class="daily-message">
-                <h3>💊 Daily Love Dose</h3>
-                <p id="daily-quote" style="font-style: italic;">"Loading love..."</p>
-            </div>
-            <button class="primary-btn" onclick="generateCuteMessage()">Cute Message <i class="fa-solid fa-comment-dots"></i></button>
-            <p id="cute-message-output" class="cute-text hidden"></p>
-        </section>
-
+            <button class="secondary-btn logout-btn" onclick="handleLogout()">Logout <i class="fa-solid fa-right-from-bracket"></i></button>
+        </div>
     </main>
 
     <footer>
