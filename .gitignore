@@ -4,3 +4,5 @@ node_modules/
 *.msi
 gh_folder/
 flames-love-hub/
+
+.vercel
