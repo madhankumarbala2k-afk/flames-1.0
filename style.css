@@ -19,7 +19,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ---- Floating Hearts Background ---- */
+/* ---- Floating Hearts ---- */
 .background-animation {
     position: fixed; top: 0; left: 0;
     width: 100vw; height: 100vh;
@@ -38,35 +38,59 @@ body {
 
 /* ---- Header ---- */
 header {
-    background: rgba(26, 11, 46, 0.8);
+    background: rgba(26, 11, 46, 0.85);
     backdrop-filter: blur(12px);
     position: fixed; width: 100%; top: 0; z-index: 200;
     border-bottom: 1px solid var(--glass-border);
 }
 .nav-center {
-    display: flex; align-items: center; justify-content: center;
-    padding: 16px 5%; max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 5%; max-width: 900px; margin: 0 auto;
 }
 .logo {
     font-family: 'Dancing Script', cursive;
-    font-size: 32px; color: var(--pink);
+    font-size: 28px; color: var(--pink);
     display: flex; align-items: center; gap: 8px;
 }
-.logo span { font-family: 'Outfit', sans-serif; font-size: 22px; color: #fff; }
+.logo span { font-family: 'Outfit', sans-serif; font-size: 20px; color: #fff; }
 .logo i { animation: beat 1.4s ease-in-out infinite; }
 @keyframes beat {
     0%,100% { transform: scale(1); }
     50%      { transform: scale(1.25); }
 }
+#nav-user-area {
+    display: flex; align-items: center; gap: 10px;
+}
+#nav-username {
+    font-size: 14px; color: #ddd; font-weight: 500;
+}
+.logout-btn-small {
+    background: rgba(255, 64, 129, 0.15);
+    border: 1px solid rgba(255, 64, 129, 0.3);
+    color: var(--pink); border-radius: 50%;
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: 0.3s; font-size: 14px;
+}
+.logout-btn-small:hover { background: var(--pink); color: #fff; }
 
-/* ---- Main Container ---- */
-.auth-container {
+/* ---- Main Wrap ---- */
+.main-wrap {
     flex: 1;
+    padding-top: 70px;
+}
+
+/* ---- AUTH PAGE ---- */
+.auth-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 80px;
-    padding: 40px 20px;
+    min-height: calc(100vh - 70px);
+    padding: 30px 16px;
+}
+.auth-card {
+    width: 100%;
+    max-width: 440px;
 }
 
 /* ---- Glass Panel ---- */
@@ -74,12 +98,10 @@ header {
     background: var(--glass-bg);
     backdrop-filter: blur(14px);
     border: 1px solid var(--glass-border);
-    border-radius: 24px; padding: 40px;
+    border-radius: 24px; padding: 36px 32px;
     box-shadow: var(--shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
     animation: fadeUp 0.6s ease;
     width: 100%;
-    max-width: 450px;
 }
 .glass-panel:hover {
     box-shadow: 0 20px 50px rgba(255, 64, 129, 0.3);
@@ -92,250 +114,256 @@ header {
 /* ---- Auth Tabs ---- */
 .auth-tabs {
     display: flex;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 30px;
-    padding: 4px;
-    margin-bottom: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0,0,0,0.3);
+    border-radius: 30px; padding: 4px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 .tab-btn {
-    flex: 1;
-    background: none;
-    border: none;
-    color: #ccc;
-    padding: 10px 0;
-    font-size: 15px;
-    font-weight: 600;
+    flex: 1; background: none; border: none;
+    color: #ccc; padding: 10px 0;
+    font-size: 15px; font-weight: 600;
     font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-    border-radius: 26px;
-    transition: 0.3s;
+    cursor: pointer; border-radius: 26px; transition: 0.3s;
 }
-.tab-btn:hover {
-    color: #fff;
-}
+.tab-btn:hover { color: #fff; }
 .tab-btn.active {
     background: linear-gradient(135deg, var(--pink), var(--purple));
     color: #fff;
-    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
+    box-shadow: 0 4px 12px rgba(255,64,129,0.3);
 }
 
 /* ---- Forms ---- */
 .auth-form h2 {
-    font-size: 24px; color: var(--pink);
+    font-size: 22px; color: var(--pink);
     display: flex; align-items: center; justify-content: center; gap: 10px;
-    margin-bottom: 8px;
-    font-weight: 600;
+    margin-bottom: 6px; font-weight: 600;
 }
 .section-desc {
-    color: #bbb;
-    font-size: 14px;
-    margin-bottom: 24px;
-    text-align: center;
+    color: #bbb; font-size: 14px;
+    margin-bottom: 22px; text-align: center;
 }
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
+    display: flex; flex-direction: column;
+    gap: 8px; margin-bottom: 18px;
 }
 .form-group label {
-    font-size: 14px;
-    color: #ddd;
-    font-weight: 500;
+    font-size: 14px; color: #ddd; font-weight: 500;
 }
-.form-group label i {
-    color: var(--pink);
-    margin-right: 4px;
-}
+.form-group label i { color: var(--pink); margin-right: 4px; }
 
 input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%;
-    padding: 13px 20px;
+    width: 100%; padding: 13px 20px;
     border-radius: 30px;
-    border: 1px solid rgba(255, 64, 129, 0.3);
-    background: rgba(0, 0, 0, 0.4);
-    color: #fff;
-    font-size: 15px;
+    border: 1px solid rgba(255,64,129,0.3);
+    background: rgba(0,0,0,0.4);
+    color: #fff; font-size: 16px;
     font-family: 'Outfit', sans-serif;
-    outline: none;
-    transition: 0.3s;
+    outline: none; transition: 0.3s;
+    -webkit-appearance: none;
 }
 input::placeholder { color: #888; }
 input:focus {
     border-color: var(--pink);
-    box-shadow: 0 0 14px rgba(255, 64, 129, 0.3);
-    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 14px rgba(255,64,129,0.3);
+    background: rgba(0,0,0,0.5);
 }
 
 /* ---- Buttons ---- */
 .primary-btn, .secondary-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     gap: 8px;
     background: linear-gradient(135deg, var(--pink), var(--purple));
     color: #fff; border: none;
-    padding: 13px 32px; border-radius: 30px;
-    font-size: 15px; font-weight: 600; font-family: 'Outfit', sans-serif;
+    padding: 14px 32px; border-radius: 30px;
+    font-size: 16px; font-weight: 600; font-family: 'Outfit', sans-serif;
     cursor: pointer; transition: 0.3s;
-    box-shadow: 0 4px 18px rgba(255, 64, 129, 0.35);
-    width: 100%;
-    margin-top: 10px;
+    box-shadow: 0 4px 18px rgba(255,64,129,0.35);
+    width: 100%; margin-top: 10px;
+    -webkit-tap-highlight-color: transparent;
 }
 .secondary-btn {
     background: linear-gradient(135deg, #7b1fa2, #4a148c);
-    box-shadow: 0 4px 18px rgba(123, 31, 162, 0.35);
+    box-shadow: 0 4px 18px rgba(123,31,162,0.35);
 }
 .primary-btn:hover, .secondary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(255, 64, 129, 0.5);
+    box-shadow: 0 6px 24px rgba(255,64,129,0.5);
 }
-.primary-btn:active, .secondary-btn:active {
-    transform: translateY(0);
-}
+.primary-btn:active, .secondary-btn:active { transform: translateY(0); }
 
 /* ---- Alert Box ---- */
 .alert-box {
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-size: 14px;
-    margin-bottom: 20px;
-    line-height: 1.4;
-    text-align: center;
+    padding: 12px 18px; border-radius: 12px;
+    font-size: 14px; margin-bottom: 18px;
+    line-height: 1.4; text-align: center;
     animation: fadeIn 0.4s;
 }
 .alert-box.error {
-    background: rgba(239, 83, 80, 0.15);
-    border: 1px solid rgba(239, 83, 80, 0.4);
+    background: rgba(239,83,80,0.15);
+    border: 1px solid rgba(239,83,80,0.4);
     color: #ff8a80;
 }
 .alert-box.success {
-    background: rgba(76, 175, 80, 0.15);
-    border: 1px solid rgba(76, 175, 80, 0.4);
+    background: rgba(76,175,80,0.15);
+    border: 1px solid rgba(76,175,80,0.4);
     color: #b9f6ca;
 }
 
-/* ---- Dashboard Card ---- */
-.dashboard-card {
+/* ---- DASHBOARD ---- */
+#page-dashboard {
+    min-height: calc(100vh - 70px);
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 30px;
+}
+
+/* ---- Game Tabs Bar ---- */
+.game-tabs-bar {
+    display: flex; gap: 8px;
+    background: rgba(0,0,0,0.35);
+    border-radius: 50px; padding: 6px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    width: 100%; max-width: 480px;
+}
+.game-tab {
+    flex: 1; background: none; border: none;
+    color: #bbb; padding: 10px 6px;
+    font-size: 13px; font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer; border-radius: 40px;
+    transition: 0.3s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    -webkit-tap-highlight-color: transparent;
+}
+.game-tab:hover { color: #fff; }
+.game-tab.active {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(255,64,129,0.35);
+}
+
+/* ---- Game Section ---- */
+.game-section {
+    width: 100%; max-width: 480px;
+    animation: fadeUp 0.4s ease;
+}
+.game-card {
     text-align: center;
-    animation: fadeUp 0.6s ease;
 }
-.dashboard-header {
-    margin-bottom: 30px;
+.game-title {
+    font-size: 22px; color: var(--pink);
+    margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
 }
+
+/* ---- FLAMES Result ---- */
+.flames-result {
+    margin-top: 28px;
+    padding: 24px 20px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,64,129,0.2);
+    text-align: center;
+    display: none;
+}
+.flames-result.show { display: block; animation: fadeUp 0.5s ease; }
+.result-emoji { font-size: 52px; margin-bottom: 10px; }
+.result-label {
+    font-size: 26px; font-weight: 700;
+    margin-bottom: 6px;
+}
+.result-names {
+    font-size: 14px; color: #bbb;
+    margin-bottom: 8px; font-style: italic;
+}
+.result-desc { font-size: 15px; color: #ddd; }
+
+/* ---- Kavithai Output ---- */
+.kav-output {
+    margin-top: 24px;
+    padding: 24px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(156,39,176,0.3);
+    text-align: left;
+    display: none;
+}
+.kav-output.show { display: block; animation: fadeUp 0.5s ease; }
+.kav-header {
+    font-size: 15px; color: var(--pink);
+    font-weight: 600; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+}
+.kav-poem p {
+    font-size: 16px; line-height: 1.9;
+    color: #f0d0ff;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ---- Profile ---- */
 .profile-avatar {
     width: 80px; height: 80px; border-radius: 50%;
     background: linear-gradient(135deg, var(--pink), var(--purple));
     display: flex; align-items: center; justify-content: center;
     font-size: 36px;
-    margin: 0 auto 16px;
-    box-shadow: 0 0 20px rgba(255, 64, 129, 0.4);
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(255,64,129,0.4);
 }
-.dashboard-header h1 {
-    font-size: 26px;
-    color: #fff;
-    margin-bottom: 6px;
-    font-weight: 700;
-}
-
 .user-details {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0,0,0,0.3);
     border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 30px;
+    padding: 18px;
+    margin: 20px 0;
     text-align: left;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 .detail-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex; justify-content: space-between;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.detail-row:last-child {
-    border-bottom: none;
-}
-.detail-label {
-    color: #bbb;
-    font-size: 14px;
-    font-weight: 500;
-}
-.detail-label i {
-    color: var(--pink);
-    margin-right: 6px;
-    width: 16px;
-    text-align: center;
-}
-.detail-val {
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    word-break: break-all;
-}
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: #bbb; font-size: 14px; font-weight: 500; }
+.detail-label i { color: var(--pink); margin-right: 6px; width: 16px; text-align: center; }
+.detail-val { color: #fff; font-size: 14px; font-weight: 600; word-break: break-all; }
+.logout-btn { margin-top: 0; }
 
 /* ---- Footer ---- */
 footer {
-    text-align: center; padding: 22px;
-    background: rgba(0, 0, 0, 0.4);
-    font-size: 14px; color: #888;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center; padding: 20px;
+    background: rgba(0,0,0,0.4);
+    font-size: 13px; color: #888;
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .hidden { display: none !important; }
-
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
 /* ---- Responsive / Mobile ---- */
 @media (max-width: 600px) {
-    .glass-panel {
-        padding: 24px 18px;
-        border-radius: 18px;
-    }
-    .logo {
-        font-size: 26px;
-    }
-    .auth-container {
-        padding: 16px 12px;
-        margin-top: 70px;
-    }
-    .auth-form h2 {
-        font-size: 20px;
-    }
-    .dashboard-header h1 {
-        font-size: 20px;
-    }
-    .primary-btn, .secondary-btn {
-        padding: 14px 20px;
-        font-size: 16px;
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-        font-size: 16px; /* Prevents iOS zoom on focus */
-        padding: 14px 18px;
-    }
-    .detail-row {
-        flex-direction: column;
-        gap: 4px;
-    }
-    .detail-val {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 380px) {
-    .glass-panel { padding: 18px 14px; }
     .logo { font-size: 22px; }
+    .glass-panel { padding: 24px 18px; border-radius: 18px; }
+    .game-tab { font-size: 12px; padding: 9px 4px; }
+    .game-tab i { font-size: 13px; }
+    .result-label { font-size: 22px; }
+    .result-emoji { font-size: 44px; }
+    .game-title { font-size: 19px; }
+    .detail-row { flex-direction: column; gap: 3px; }
 }
 
-/* Safe area for notched phones */
+@media (max-width: 360px) {
+    .glass-panel { padding: 18px 12px; }
+    .game-tabs-bar { gap: 4px; padding: 4px; }
+}
+
 @supports (padding: max(0px)) {
     body {
         padding-left: max(0px, env(safe-area-inset-left));
         padding-right: max(0px, env(safe-area-inset-right));
     }
     footer {
-        padding-bottom: max(22px, env(safe-area-inset-bottom));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
     }
 }

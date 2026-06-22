@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>FLAMES Hub - Welcome 💖</title>
-    <meta name="description" content="FLAMES Hub - Your love calculator and relationship hub. Login or register to access your account.">
+    <title>FLAMES Hub 💖</title>
+    <meta name="description" content="FLAMES Hub - Play FLAMES, generate Kavithai, and more!">
     <meta name="theme-color" content="#1a0b2e">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,88 +18,150 @@
     <div class="background-animation" id="bg-anim"></div>
 
     <!-- Header -->
-    <header>
+    <header id="main-header">
         <nav class="nav-center">
             <div class="logo">
                 <i class="fa-solid fa-heart-pulse"></i> FLAMES<span>Hub</span>
             </div>
+            <div id="nav-user-area" class="hidden">
+                <span id="nav-username"></span>
+                <button class="logout-btn-small" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
         </nav>
     </header>
 
-    <main class="auth-container">
-        <!-- Auth Glass Card -->
-        <div class="glass-panel auth-card" id="auth-card">
-            <!-- Tabs -->
-            <div class="auth-tabs" id="auth-tabs">
-                <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Login</button>
-                <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Register</button>
+    <main class="main-wrap">
+
+        <!-- ====== AUTH PAGE ====== -->
+        <div id="page-auth" class="auth-container">
+            <div class="glass-panel auth-card" id="auth-card">
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Login</button>
+                    <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Register</button>
+                </div>
+
+                <div id="alert-box" class="alert-box hidden"></div>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
+                    <h2><i class="fa-solid fa-right-to-bracket"></i> Login</h2>
+                    <p class="section-desc">Enter your username or email to continue.</p>
+                    <div class="form-group">
+                        <label for="login-handle"><i class="fa-solid fa-user"></i> Username or Email</label>
+                        <input type="text" id="login-handle" placeholder="e.g. loverboy" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password"><i class="fa-solid fa-key"></i> Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="primary-btn submit-btn">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form hidden" onsubmit="handleRegister(event)">
+                    <h2><i class="fa-solid fa-user-plus"></i> Join the Hub</h2>
+                    <p class="section-desc">Create your free account.</p>
+                    <div class="form-group">
+                        <label for="reg-username"><i class="fa-solid fa-signature"></i> Username</label>
+                        <input type="text" id="reg-username" placeholder="e.g. romeo123" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email</label>
+                        <input type="email" id="reg-email" placeholder="e.g. juliet@hub.com" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password"><i class="fa-solid fa-key"></i> Password</label>
+                        <input type="password" id="reg-password" placeholder="••••••••" required autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="primary-btn submit-btn">Create Account <i class="fa-solid fa-circle-check"></i></button>
+                </form>
             </div>
-
-            <!-- Error/Success Alert Box -->
-            <div id="alert-box" class="alert-box hidden"></div>
-
-            <!-- Login Form -->
-            <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
-                <h2><i class="fa-solid fa-right-to-bracket"></i> Login to Hub</h2>
-                <p class="section-desc">Enter your username or email and password to log in.</p>
-                <div class="form-group">
-                    <label for="login-handle"><i class="fa-solid fa-user"></i> Username or Email</label>
-                    <input type="text" id="login-handle" placeholder="e.g. loverboy or love@hub.com" required autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label for="login-password"><i class="fa-solid fa-key"></i> Password</label>
-                    <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
-                </div>
-                <button type="submit" class="primary-btn submit-btn">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
-            </form>
-
-            <!-- Register Form -->
-            <form id="register-form" class="auth-form hidden" onsubmit="handleRegister(event)">
-                <h2><i class="fa-solid fa-user-plus"></i> Join the Hub</h2>
-                <p class="section-desc">Create your free account to access features.</p>
-                <div class="form-group">
-                    <label for="reg-username"><i class="fa-solid fa-signature"></i> Username</label>
-                    <input type="text" id="reg-username" placeholder="e.g. romeo123" required autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
-                    <input type="email" id="reg-email" placeholder="e.g. juliet@hub.com" required autocomplete="email">
-                </div>
-                <div class="form-group">
-                    <label for="reg-password"><i class="fa-solid fa-key"></i> Password</label>
-                    <input type="password" id="reg-password" placeholder="••••••••" required autocomplete="new-password">
-                </div>
-                <button type="submit" class="primary-btn submit-btn">Create Account <i class="fa-solid fa-circle-check"></i></button>
-            </form>
         </div>
 
-        <!-- Logged In Dashboard (Initially Hidden) -->
-        <div class="glass-panel dashboard-card hidden" id="dashboard-card">
-            <div class="dashboard-header">
-                <div class="profile-avatar">
-                    <i class="fa-solid fa-user-astronaut"></i>
-                </div>
-                <h1 id="welcome-message">Welcome back! 💖</h1>
-                <p class="section-desc">You are successfully logged into your FLAMES Hub account.</p>
+        <!-- ====== DASHBOARD / GAME PAGE ====== -->
+        <div id="page-dashboard" class="hidden">
+
+            <!-- Tab Navigation -->
+            <div class="game-tabs-bar">
+                <button class="game-tab active" id="gtab-flames" onclick="showGameTab('flames')">
+                    <i class="fa-solid fa-fire-flame-curved"></i> FLAMES
+                </button>
+                <button class="game-tab" id="gtab-kavithai" onclick="showGameTab('kavithai')">
+                    <i class="fa-solid fa-feather-pointed"></i> Kavithai
+                </button>
+                <button class="game-tab" id="gtab-profile" onclick="showGameTab('profile')">
+                    <i class="fa-solid fa-user-astronaut"></i> Profile
+                </button>
             </div>
-            
-            <div class="user-details">
-                <div class="detail-row">
-                    <span class="detail-label"><i class="fa-solid fa-circle-user"></i> Username:</span>
-                    <span class="detail-val" id="profile-username">loading...</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email:</span>
-                    <span class="detail-val" id="profile-email">loading...</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label"><i class="fa-solid fa-id-card"></i> User ID:</span>
-                    <span class="detail-val" id="profile-id">loading...</span>
+
+            <!-- FLAMES Game -->
+            <div id="section-flames" class="game-section">
+                <div class="glass-panel game-card">
+                    <h2 class="game-title"><i class="fa-solid fa-fire-flame-curved"></i> FLAMES Game</h2>
+                    <p class="section-desc">Find out your relationship status! 💖</p>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user" style="color:var(--pink)"></i> Your Name</label>
+                        <input type="text" id="name1" placeholder="Enter your name" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-heart" style="color:var(--pink)"></i> Partner's Name</label>
+                        <input type="text" id="name2" placeholder="Enter partner's name" autocomplete="off">
+                    </div>
+
+                    <button class="primary-btn" onclick="calcFlames()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Check FLAMES
+                    </button>
+
+                    <div id="flames-result" class="flames-result hidden"></div>
                 </div>
             </div>
 
-            <button class="secondary-btn logout-btn" onclick="handleLogout()">Logout <i class="fa-solid fa-right-from-bracket"></i></button>
+            <!-- Kavithai Generator -->
+            <div id="section-kavithai" class="game-section hidden">
+                <div class="glass-panel game-card">
+                    <h2 class="game-title"><i class="fa-solid fa-feather-pointed"></i> Kavithai Generator</h2>
+                    <p class="section-desc">உன் உணர்வுகளை கவிதையாக சொல்! 🌹</p>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-pen" style="color:var(--pink)"></i> Topic / Name</label>
+                        <input type="text" id="kav-topic" placeholder="e.g. Priya, Love, Rain...">
+                    </div>
+                    <button class="primary-btn" onclick="genKavithai()">
+                        <i class="fa-solid fa-wand-sparkles"></i> Generate Kavithai
+                    </button>
+                    <div id="kav-output" class="kav-output hidden"></div>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="section-profile" class="game-section hidden">
+                <div class="glass-panel game-card">
+                    <div class="profile-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+                    <h2 id="profile-welcome" class="game-title" style="margin-top:16px"></h2>
+                    <div class="user-details">
+                        <div class="detail-row">
+                            <span class="detail-label"><i class="fa-solid fa-circle-user"></i> Username</span>
+                            <span class="detail-val" id="profile-username">-</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email</span>
+                            <span class="detail-val" id="profile-email">-</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label"><i class="fa-solid fa-id-card"></i> Member Since</span>
+                            <span class="detail-val" id="profile-since">-</span>
+                        </div>
+                    </div>
+                    <button class="secondary-btn logout-btn" onclick="handleLogout()">
+                        Logout <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </div>
+            </div>
+
         </div>
+
     </main>
 
     <footer>
