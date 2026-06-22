@@ -286,9 +286,56 @@ footer {
 
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
-/* ---- Responsive ---- */
-@media (max-width: 480px) {
-    .glass-panel { padding: 24px; }
-    .dashboard-header h1 { font-size: 22px; }
-    .auth-container { padding: 20px 15px; }
+/* ---- Responsive / Mobile ---- */
+@media (max-width: 600px) {
+    .glass-panel {
+        padding: 24px 18px;
+        border-radius: 18px;
+    }
+    .logo {
+        font-size: 26px;
+    }
+    .auth-container {
+        padding: 16px 12px;
+        margin-top: 70px;
+    }
+    .auth-form h2 {
+        font-size: 20px;
+    }
+    .dashboard-header h1 {
+        font-size: 20px;
+    }
+    .primary-btn, .secondary-btn {
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        padding: 14px 18px;
+    }
+    .detail-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+    .detail-val {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .glass-panel { padding: 18px 14px; }
+    .logo { font-size: 22px; }
+}
+
+/* Safe area for notched phones */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+    footer {
+        padding-bottom: max(22px, env(safe-area-inset-bottom));
+    }
 }
